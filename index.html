@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Map with Leaflet</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="scrip.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+    <div id="main">
+        <div id="header">
+            <ul id="nav">
+                <li><a href="index.html
+                    ">Trang Chủ</a></li>
+                <li><a href="">option 1</a></li>
+                <li><a href="">option 1</a></li>
+                <li>
+                    <a href="">more 
+                        <i class="fa-solid fa-caret-down"></i>
+                    </a>
+                    <ul class="subnav">
+                        <li><a href="">op1</a></li>
+                        <li><a href="">op2</a></li>
+                        <li><a href="">op3</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="search-btn">
+                <a href=""><i class="search-icon fa-solid fa-magnifying-glass"></i>
+            </a>
+        </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-section">
+            <h2 class="section-heading">
+                Giới Thiệu
+            </h2>
+            <p class="section-sub-heading">thông tin chi giới thiệu</p>
+        
+            <h2 class="section-heading">
+                Thành Viên Nhóm
+            </h2>
+            <div class="member-list">
+                <div class="member-item">
+                    <p class="member-name">Thành viên</p>
+                    <img src="image/thanhvien1.jpg" alt="Name" class="member-img">
+                </div>
+                <div class="member-item">
+                    <p class="member-name">Thành viên</p>
+                    <img src="image/thanhvien1.jpg" alt="Name" class="member-img">
+                </div>
+                <div class="member-item">
+                    <p class="member-name">Thành viên</p>
+                    <img src="image/thanhvien1.jpg" alt="Name" class="member-img">
+                </div>
+                
+                <div class="clear"></div>
+            </div>
+        </div>
+        </div>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Khởi tạo bản đồ và set vị trí trung tâm
+        var map = L.map('map').setView([16.079135335902393, 108.12950134277345], 14); // Zoom rộng để thấy cả 2 marker
+
+        // Tải và hiển thị tiles của bản đồ từ OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Marker 1: Hà Nội
+        var marker1 = L.marker([16.076458382220874, 108.14186096191408]).addTo(map)
+            .bindTooltip('<b>Hà Nội</b><br>Thủ đô Việt Nam').openPopup();
+
+        // Thêm sự kiện click vào marker 1 để chuyển đến Wikipedia Hà Nội
+        marker1.on('click', function() {
+            window.location.href = 'https://vi.wikipedia.org/wiki/H%C3%A0_N%E1%BB%99i';
+        });
+
+        // Marker 2: TP. Hồ Chí Minh
+        var marker2 = L.marker([16.090440688709435, 108.12709808349611]).addTo(map)
+            .bindTooltip('<b>TP. Hồ Chí Minh</b><br>Thành phố lớn nhất Việt Nam').openPopup();
+
+        // Thêm sự kiện click vào marker 2 để chuyển đến Wikipedia TP. Hồ Chí Minh
+        marker2.on('click', function() {
+            window.location.href = 'https://vi.wikipedia.org/wiki/Th%C3%A0nh_ph%E1%BB%91_H%E1%BB%93_Ch%C3%AD_Minh';
+        });
+
+        // Thêm sự kiện click để hiển thị thông tin khi click vào map
+        map.on('click', function(e) {
+            var lat = e.latlng.lat;
+            var lng = e.latlng.lng;
+            L.popup()
+                .setLatLng([lat, lng])
+                .setContent("Bạn đã click vào vị trí: " + lat + ", " + lng)
+                .openOn(map);
+        });
+    </script>
+    <div class="content">
+        
+        <div class="contact-section">
+            <div class="content-section">
+                <h2 class="section-heading text-while">
+                    Liên Hệ
+                </h2>
+                <p class="section-sub-heading text-while">Hãy liên hệ chúng tôi</p>
+    
+                <div class="row text-while">
+                    <div class="col col-half contact-info">
+                        <p><i class="fa-solid fa-location-dot text-while"></i>435 Tôn Đức Thắng</p>
+                        <p><i class="fa-solid fa-phone"></i>0123456789</p>
+                        <p><i class="fa-solid fa-envelope"></i>mail@gmail.com</p>
+                        <p><a href=""><i class="fa-brands fa-tiktok"></i></a>
+                        <a href=""><i class="fa-brands fa-youtube"></i></a>
+                        <a href=""><i class="fa-brands fa-facebook"></i></a>
+                        </p>
+
+                    </div>
+                    <div class="col col-half contact-form">
+                        <form action="">
+                            <div class="row contact-content">
+                                <div class="col col-half">
+                                    <input type="text" name="" placeholder="Tên của bạn" required id="" class="form-control">
+                                </div>
+                                <div class="col col-half">
+                                    <input type="email" name="" placeholder="Email" required id="" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-full">
+                                    <input type="text" name="" placeholder="Tin nhắn" required id="" class="form-control">
+                                </div>
+                            </div>
+                            <input class="form-submit-btn" type="submit" value="Gửi">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="map-section">
+            <img src="image/map.jpg" alt="map">
+        </div>
+    </div>
+    <div class="footer">
+        <div class="socials-list">
+            <a href=""><i class="fa-brands fa-facebook"></i></a>
+            <a href=""><i class="fa-brands fa-tiktok"></i></a>
+            <a href=""><i class="fa-brands fa-youtube"></i></a>
+        </div>
+    </div>
+</body>
+</html>
